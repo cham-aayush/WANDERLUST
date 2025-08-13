@@ -1,5 +1,10 @@
+body{
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+}
+
 .navbar{
     height: 5rem;
+    background-color: white;
 }
  .fa-compass {
         font-size: 2rem;
@@ -8,4 +13,249 @@
 
 .nav-link{
     color:#222222 !important;
+}
+.f-info-links a {
+    text-decoration: none;
+    color: #222222 !important;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-links
+{
+    width: 100%;
+}
+.f-info-socials{
+    width: 100%;
+    font-size:1.2rem;
+    margin-right:2rem;
+}
+
+.f-info-socials i{
+    margin: 0 1rem;
+    color: #222222;
+}
+.f-info{
+text-align: center;
+height: 8rem;
+background-color: #ebebeb;
+display : flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: space-evenly;
+}
+
+.card{
+    border: none !important; 
+    margin-bottom: 2rem;        
+}
+
+.card-img-top {
+    border-radius: 1rem !important;
+    width: 100%;
+    object-fit: cover !important;
+}
+
+
+.card-body{
+    padding: 0 !important;
+}     
+
+.card-text p{
+font-weight: 400  !important;
+}
+
+.listing-link{
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-img-overlay {
+    opacity: 0; 
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
+}
+
+/* ===== Form Styles (Create & Edit Listing) ===== */
+.form-container {
+    background: white;
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.08);
+    max-width: 420px;
+    width: 100%;
+    margin: 2rem auto;
+}
+
+.form-container h1 {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    text-align: center;
+    color: #333;
+}
+
+form.listing-form {
+    display: flex;
+    flex-direction: column;
+}
+
+form.listing-form label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #444;
+}
+
+form.listing-form input,
+form.listing-form textarea {
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+form.listing-form input:focus,
+form.listing-form textarea:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 5px rgba(108, 99, 255, 0.3);
+    outline: none;
+}
+
+form.listing-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+form.listing-form button {
+    padding: 0.8rem;
+    background: #6c63ff;
+    color: white;
+    font-size: 1.05rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+form.listing-form button:hover {
+    background: #5a54d4;
+    transform: translateY(-2px);
+}
+
+form.listing-form button:active {
+    transform: translateY(0);
+}
+
+/* ===== Responsive Form Styles ===== */
+@media (max-width: 500px) {
+    .form-container {
+        padding: 1.5rem;
+        max-width: 95%;
+    }
+}
+
+/* ===== Show Page Styles ===== */
+.listing-show-container {
+    background: white;
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.08);
+    max-width: 600px;
+    width: 100%;
+    margin: 2rem auto;
+}
+
+.listing-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+    text-align: center;
+}
+
+.listing-details p {
+    font-size: 1.05rem;
+    margin: 0.4rem 0;
+    color: #555;
+}
+
+.listing-description {
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 1rem;
+}
+
+.listing-price {
+    font-weight: bold;
+    color: #6c63ff;
+}
+
+.listing-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1rem;
+    text-align: center;
+    display: inline-block;
+    transition: background 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background: #6c63ff;
+    color: white;
+}
+
+.edit-btn:hover {
+    background: #5a54d4;
+    transform: translateY(-2px);
+}
+
+.delete-btn {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+}
+
+.delete-btn:hover {
+    background: #d63b3b;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 500px) {
+    .listing-actions {
+        flex-direction: column;
+    }
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+/* ===== Show Page Image Styles ===== */
+.listing-image-wrapper {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.listing-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 12px;
 }

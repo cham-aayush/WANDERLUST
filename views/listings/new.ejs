@@ -1,18 +1,27 @@
 <% layout('layouts/boilerplate') %>
 <body>
-    <h1>Create New Listing</h1>
-    <form method="POST" action="/listings">
-        <input name="listing[title]" type="text" placeholder="Title">
-        <br /><br /><br />
-        <textarea name="listing[description]" placeholder="Description"></textarea>
-        <br /><br /><br />
-        <input name="listing[image]" placeholder="enter Image URL" type="text">
-        <br /><br /><br />
-        <input name="listing[price]" placeholder="enter price" type="number">
-        <br /><br /><br />
-        <input name="listing[country]" placeholder="enter country" type="text">
-        <br /><br /><br />
-        <input name="listing[location]" placeholder="enter location" type="text">
-        <button type="submit">Create Listing</button>
-    </form>
+    <div class="form-container">
+        <h1>Create New Listing</h1>
+        <form class="listing-form" method="POST" action="/listings">
+            <label for="title">Title</label>
+            <input id="title" name="listing[title]" type="text" placeholder="Enter listing title" required>
+
+            <label for="description">Description</label>
+            <textarea id="description" name="listing[description]" placeholder="Write a short description..." required></textarea>
+
+            <label for="image">Image URL</label>
+            <input id="image" name="listing[image]" type="url" placeholder="https://example.com/image.jpg">
+
+            <label for="price">Price ($)</label>
+            <input id="price" name="listing[price]" type="number" placeholder="Enter price" min="0" required>
+
+            <label for="country">Country</label>
+            <input id="country" name="listing[country]" type="text" placeholder="Enter country" required>
+
+            <label for="location">Location</label>
+            <input id="location" name="listing[location]" type="text" placeholder="Enter location" required>
+
+            <button type="submit">Create Listing</button>
+        </form>
+    </div>
 </body>
