@@ -7,7 +7,7 @@ const methodOverride = require('method-override');
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
-
+const {listingSchema} = require("./schema.js");
 
 const MONGO_URL = 'mongodb://localhost:27017/wanderlust';
 
@@ -33,6 +33,18 @@ app.get('/',(req,res)=>{
 });
 
 
+const validateListing = (req,res,next)=>{
+    let {error} = listingSchema.validate(req.body);
+    if(error)
+    {
+        let errorMsg = error.details.map((el) => el.message).join(",");
+        throw new ExpressError(400,reult.error);
+    }else{
+        next();
+    }
+}
+
+
 app.get('/listings', wrapAsync(async (req, res) => {
    const allListings = await Listing.find({});
         res.render('listings/index.ejs', {  allListings });
@@ -50,10 +62,10 @@ app.get('/listings/:id', wrapAsync(async (req, res) => {
 }));
 
 //Create Route
-app.post('/listings', wrapAsync(async (req, res) => {
+app.post('/listings', validateListing,rapAsync(async (req, res) => {
    const newListing =  new Listing(req.body.listing);
    await newListing.save();
-   res.redirect(`/listings`);
+    res.redirect(`/listings`);
 }));
 
 // Edit Route   
@@ -64,7 +76,9 @@ app.get('/listings/:id/edit', wrapAsync(async (req, res) => {
 }));
 
 // Update Route
-app.put('/listings/:id', wrapAsync(async (req, res) => {
+app.put('/listings/:id', validateListing ,wrapAsync(async (req, res) => {
+    if (!req.body.listing) throw new ExpressError('Invalid Listing Data', 400);
+    // Ensure that the listing data is valid before proceeding
     let {id} = req.params;
     await Listing.findByIdAndUpdate(id,{ ...req.body.listing});
    res.redirect(`/listings/${id}`);
@@ -84,23 +98,10 @@ app.all('*', (req, res, next) => {
 
 app.use((err, req, res, next) => {
     const { statusCode = 500, message = "Something went wrong" } = err;
-    res.status(statusCode).send(message);
+    //res.status(statusCode).send(message);
+    res.render("error.ejs", { error: err });
 });
 
-
-
-
-// app.get("/testListing",async  (req,res)=>{
-//     let sampleListing = new Listing({
-//         title: "New Villa",
-//         description: "This is a sample listing for testing purposes.",
-//         price: 10000,
-//         location: "NEW YORK",
-//         country: "USA"
-//     });
-//     await sampleListing.save();
-//     res.send("Sample listing created successfully");
-// });
 
 app.listen(8080, () => {
   console.log('Server is running on port 8080');
