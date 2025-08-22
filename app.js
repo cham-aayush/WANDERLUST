@@ -62,7 +62,7 @@ app.get('/listings/:id', wrapAsync(async (req, res) => {
 }));
 
 //Create Route
-app.post('/listings', validateListing,rapAsync(async (req, res) => {
+app.post('/listings', validateListing, wrapAsync(async (req, res) => {
    const newListing =  new Listing(req.body.listing);
    await newListing.save();
     res.redirect(`/listings`);
