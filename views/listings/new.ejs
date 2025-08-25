@@ -89,25 +89,4 @@
       </form>
     </div>
   </div>
-  <script>
-  // Wait for the page to load
-  (() => {
-    'use strict'
-
-    // Fetch all forms we want validation on
-    const forms = document.querySelectorAll('.needs-validation')
-
-    // Loop over them and prevent submission if invalid
-    Array.from(forms).forEach(form => {
-      form.addEventListener('submit', event => {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-
-        form.classList.add('was-validated')
-      }, false)
-    })
-  })()
-</script>
 </body>

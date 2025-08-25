@@ -17,5 +17,27 @@
     </div>
         <%- include('../includes/footer.ejs') %>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <script>
+  // Wait for the page to load
+  (() => {
+    'use strict'
+
+    // Fetch all forms we want validation on
+    const forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission if invalid
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+  })()
+</script>
 </body>
+
 </html>

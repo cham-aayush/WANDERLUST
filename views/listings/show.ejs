@@ -1,5 +1,9 @@
 <% layout('layouts/boilerplate') %>
-<body>
+<div class=" row mt-3">
+<div class="col-8 offset-3">
+  <h3><%=listing.title%></h3>
+</div>
+</div>
   <div class="listing-show-container">
     <% if (listing.image && listing.image.url) { %>
     <div class="listing-image-wrapper">
@@ -29,5 +33,42 @@
         </button>
       </form>
     </div>
+    <div class="col-9 offset-1 mt-5 mb-5">
+      <hr>
+      <h4>Leave a Review</h4>
+      <form action="/listings/<%= listing._id %>/reviews" method="POST" class="needs-validation" novalidate>
+        <div class="mb-3 mt-3">
+        <label for="rating" class="form-label">Rating</label>
+        <input type="range" id="rating" name="review[rating]" min="1" max="5" class="form-range" />
+        </div>
+        <div class="mb-3 mt-3">
+        <label for="comment">Comments</label>
+        <textarea id="comment" name="review[comment]" rows="5" cols="30" class="form-control" required></textarea>
+       <div class="invalid-feedback">Please write a comment</div>
+      </div>
+        <button type="submit" class="btn btn-outline-dark">Submit Review</button>
+      </form>
+      <hr>
+      <h4 class="mb-3">Reviews</h4>
+<div class="row">
+  <% for(let review of listing.reviews) { %>
+    <div class="col-md-4 mb-3">
+      <div class="card shadow-sm border-0 rounded-3 h-100">
+        <div class="card-body">
+          <h5 class="card-title text-warning">
+            ⭐ <%= review.rating %> / 5
+          </h5>
+          <p class="card-text text-muted">
+            <%= review.comment %>
+          </p>
+          <form  class = "mb-3" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+          <button class="btn btn-outline-dark">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  <% } %>
+</div>
+
+    </div>
   </div>
-</body>
