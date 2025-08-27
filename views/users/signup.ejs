@@ -1,0 +1,73 @@
+<% layout('layouts/boilerplate') %>
+<div class="container mt-5">
+  <div class="card shadow-sm p-4">
+    <h1 class="mb-4">Sign Up to WANDERLUST</h1>
+    <form
+      class="needs-validation"
+      novalidate
+      method="POST"
+      action="/signup"
+    >
+     <!-- Username -->
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input
+          id="username"
+          name="username"
+          type="text"
+          class="form-control"
+          placeholder="Choose a username"
+          required
+        />
+        <div class="invalid-feedback">Please enter a username.</div>
+      </div>  
+
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          class="form-control"
+          placeholder="example@email.com"
+          required
+        />
+        <div class="invalid-feedback">Please enter a valid email.</div>
+      </div>
+
+     
+
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          class="form-control"
+          placeholder="Enter your password"
+          required
+        />
+        <div class="invalid-feedback">Please enter a password.</div>
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="mb-3">
+        <label for="confirmPassword" class="form-label">Confirm Password</label>
+        <input
+          id="confirmPassword"
+          name="user[confirmPassword]"
+          type="password"
+          class="form-control"
+          placeholder="Re-enter your password"
+          required
+        />
+        <div class="invalid-feedback">Passwords must match.</div>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+    </form>
+  </div>
+</div>
