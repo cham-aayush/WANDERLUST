@@ -16,6 +16,7 @@
     <% } %>
     <h1 class="listing-title"><%= listing.title %></h1>
     <div class="listing-details">
+      <p class="listing-owner"><b>Posted by: </b><i><%= listing.owner ? listing.owner.username : 'Unknown' %></i></p>
       <p class="listing-description"><%= listing.description %></p>
       <p class="listing-price">
         Price: &#8377; <%= listing.price.toLocaleString("en-IN") %>
