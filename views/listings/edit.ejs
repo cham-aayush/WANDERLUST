@@ -20,12 +20,13 @@
 <%= listing.description %></textarea
       >
       <label for="image">Image URL</label>
-      <input
-        id="image"
-        name="listing[image]"
-        type="url"
-        value="<%= listing.images %>"
-      />
+<input
+  id="image"
+  name="listing[image][url]"
+  type="url"
+  value="<%= listing.image.url %>"
+/>
+
       <label for="price">Price ($)</label>
       <input
         id="price"
