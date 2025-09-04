@@ -7,6 +7,7 @@
         novalidate
         method="POST"
         action="/listings"
+        enctype="multipart/form-data"
       >
         <!-- Title -->
         <div class="mb-3">
@@ -35,16 +36,12 @@
         </div>
         <!-- Image -->
         <div class="mb-3">
-          <label for="image" class="form-label">Image URL</label>
+          <label for="image" class="form-label">Upload Image </label>
           <input
-            id="image"
             name="listing[image]"
-            type="url"
+            type="file"
             class="form-control"
-            placeholder="https://example.com/image.jpg"
-          />
-          <div class="invalid-feedback">Please provide a valid image URL.</div>
-        </div>
+            /></div>
         <!-- Price -->
         <div class="mb-3">
           <label for="price" class="form-label">Price ($)</label>
