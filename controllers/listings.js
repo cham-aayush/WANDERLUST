@@ -43,15 +43,20 @@ module.exports.renderEditForm = async (req, res) => {
      req.flash('error', 'Cannot find that listing!');
      return res.redirect('/listings');
     }
-   res.render('listings/edit.ejs', { listing });
+    let originalImageUrl = listing.image.url;
+    originalImageUrl.replace('/upload', '/upload/h_100,w_250');
+   res.render('listings/edit.ejs', { listing, originalImageUrl });
 }
 
 module.exports.updateListing = async (req, res) => {
-    if (!req.body.listing) throw new ExpressError('Invalid Listing Data', 400);
-    // Ensure that the listing data is valid before proceeding
-
-    let {id} = req.params;
-    await Listing.findByIdAndUpdate(id,{ ...req.body.listing});
+      let {id} = req.params;
+   const listing =  await Listing.findByIdAndUpdate(id, {...req.body.listing});
+   if(typeof req.file !== 'undefined'){
+   let url = req.file.path;
+   let filename = req.file.filename;
+   listing.image = {url, filename};
+   await listing.save();
+   }
     req.flash('success', 'Successfully updated listing!');
    res.redirect(`/listings/${id}`);
 }

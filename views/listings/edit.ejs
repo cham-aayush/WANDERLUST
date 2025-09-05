@@ -1,12 +1,13 @@
 <% layout('layouts/boilerplate') %>
-<body>
+<div class="main-content">
   <div class="form-container">
     <h1>Edit Your Listing</h1>
     <form
       class="listing-form"
       method="POST"
       action="/listings/<%= listing._id %>?_method=PUT"
-    >
+      enctype="multipart/form-data">
+      
       <label for="title">Title</label>
       <input
         id="title"
@@ -15,17 +16,22 @@
         value="<%= listing.title %>"
         required
       />
+
       <label for="description">Description</label>
       <textarea id="description" name="listing[description]" required>
-<%= listing.description %></textarea
-      >
-      <label for="image">Image URL</label>
-<input
-  id="image"
-  name="listing[image][url]"
-  type="url"
-  value="<%= listing.image.url %>"
-/>
+<%= listing.description %></textarea>
+
+      <div class="mb-3">
+        Original Image:
+        <img src="<%=originalImageUrl%>">
+      </div>
+
+      <label for="image">Upload New Image</label>
+      <input
+        name="listing[image]"
+        type="file"
+        class="form-control"
+      />
 
       <label for="price">Price ($)</label>
       <input
@@ -36,6 +42,7 @@
         min="0"
         required
       />
+
       <label for="country">Country</label>
       <input
         id="country"
@@ -44,6 +51,7 @@
         value="<%= listing.country %>"
         required
       />
+
       <label for="location">Location</label>
       <input
         id="location"
@@ -52,7 +60,77 @@
         value="<%= listing.location %>"
         required
       />
+
       <button type="submit">Save Changes</button>
     </form>
   </div>
-</body>
+
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f9f9f9;
+}
+
+/* New wrapper only for main content */
+.main-content {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.form-container {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  max-width: 500px;
+  width: 100%;
+}
+
+    .listing-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .listing-form label {
+      margin-top: 1rem;
+      margin-bottom: 0.3rem;
+      font-weight: bold;
+    }
+
+    .listing-form input,
+    .listing-form textarea,
+    .listing-form button {
+      padding: 0.6rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .listing-form textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .listing-form button {
+      margin-top: 1.5rem;
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .listing-form button:hover {
+      background: #0056b3;
+    }
+
+    .mb-3 img {
+      max-width: 100%;
+      margin-top: 0.5rem;
+      border-radius: 4px;
+    }
+  </style>
+</div
