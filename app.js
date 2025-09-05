@@ -48,7 +48,7 @@ app.engine("ejs", ejsMate);
 const store = MongoStore.create({
     mongoUrl: dbURL,
     crypto: {
-        secret: 'mysuersecretkey'
+        secret: process.env.SECRET
     },
     touchAfter: 24 * 3600 // time period in seconds
 });
@@ -59,7 +59,7 @@ store.on("error", () =>{
 
 const sessionOptions = {
     store,
-    secret: 'mysecretkey',
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
