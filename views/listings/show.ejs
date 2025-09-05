@@ -74,8 +74,9 @@
 
     <% } %>
       <hr>
-      <h4 class="mb-3">Reviews</h4>
+      <% if (listing.reviews.length > 0) { %>
 <div class="row">
+  <h4 class="mb-3">Reviews</h4>
   <% for (let review of listing.reviews) { %>
     <div class="col-5 ms-4 mb-4">
       <div class="card shadow-sm border-0 rounded-3 h-100">
@@ -97,6 +98,6 @@
     </div>
   <% } %>
 </div>
-
-    </div>
+<% } %>
+</div>
   </div>

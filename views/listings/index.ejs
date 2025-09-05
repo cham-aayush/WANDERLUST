@@ -1,24 +1,110 @@
 <% layout('layouts/boilerplate') %>
-<h1>All Listings</h1>
-<!-- <form method="GET" action="/listings/new"> <button>Create New Listing</button> </form> -->
-<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4">
+
+<!-- 🔍 Filter Bar -->
+<div class="container-fluid bg-light py-3 border-bottom">
+  <form class="row g-2 align-items-center justify-content-center" method="GET" action="/listings">
+    <!-- Location -->
+    <div class="col-md-3 col-sm-6">
+      <input 
+        type="text" 
+        name="location" 
+        class="form-control" 
+        placeholder="Where are you going?"
+        value="<%= typeof query !== 'undefined' ? query.location : '' %>"
+      />
+    </div>
+
+    <!-- Price Range -->
+    <div class="col-md-2 col-sm-6">
+      <input 
+        type="number" 
+        name="minPrice" 
+        class="form-control" 
+        placeholder="Min Price"
+        min="0"
+        value="<%= typeof query !== 'undefined' ? query.minPrice : '' %>"
+      />
+    </div>
+    <div class="col-md-2 col-sm-6">
+      <input 
+        type="number" 
+        name="maxPrice" 
+        class="form-control" 
+        placeholder="Max Price"
+        min="0"
+        value="<%= typeof query !== 'undefined' ? query.maxPrice : '' %>"
+      />
+    </div>
+
+    <!-- Category -->
+    <div class="col-md-2 col-sm-6">
+      <select name="category" class="form-select">
+        <option value="">All Types</option>
+        <option value="apartment">Apartment</option>
+        <option value="villa">Villa</option>
+        <option value="cabin">Cabin</option>
+        <option value="hostel">Hostel</option>
+      </select>
+    </div>
+
+    <!-- Search Button -->
+    <div class="col-md-2 col-sm-12">
+      <button type="submit" class="btn btn-danger w-100">Search</button>
+    </div>
+  </form>
+</div>
+
+<!-- Title + Tax Switch -->
+<div class="d-flex justify-content-between align-items-center mt-4">
+  <h1>All Listings</h1>
+  <div class="d-flex align-items-center">
+    <label class="form-check-label me-2" for="taxSwitch">Show Price with Tax (18%)</label>
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" id="taxSwitch">
+    </div>
+  </div>
+</div>
+
+<!-- Listings Grid -->
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4 mt-3">
   <% for(let listing of allListings) { %>
-  <a href="/listings/<%= listing.id %>" class="listing-link">
+  <a href="/listings/<%= listing.id %>" class="listing-link text-decoration-none text-dark">
     <div class="card col">
       <img
         src="<%= listing.image.url %>"
         class="card-img-top"
         alt="listing_image"
-        style="height: 20rem"
+        style="height: 20rem; object-fit: cover;"
       />
-      <div class="card-img-overlay"></div>
       <div class="card-body">
         <p class="card-text">
           <b><%= listing.title %></b> <br />
-          &#8377; <%= listing.price.toLocaleString("en-IN") %> / night
+          &#8377; 
+          <span class="listing-price" 
+                data-base="<%= listing.price %>">
+            <%= listing.price.toLocaleString("en-IN") %>
+          </span> / night
         </p>
       </div>
     </div>
   </a>
   <% } %>
 </div>
+
+<!-- Tax Switch Script -->
+<script>
+  const taxSwitch = document.getElementById('taxSwitch');
+  const prices = document.querySelectorAll('.listing-price');
+
+  taxSwitch.addEventListener('change', () => {
+    prices.forEach(priceEl => {
+      const basePrice = parseFloat(priceEl.dataset.base);
+      if (taxSwitch.checked) {
+        const taxed = basePrice * 1.18; // 18% added
+        priceEl.textContent = taxed.toLocaleString("en-IN", { maximumFractionDigits: 0 });
+      } else {
+        priceEl.textContent = basePrice.toLocaleString("en-IN", { maximumFractionDigits: 0 });
+      }
+    });
+  });
+</script>
